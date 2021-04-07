@@ -3,11 +3,15 @@ package iua.edu.soa.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -27,6 +31,49 @@ public class Transaccion implements Serializable{
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date fechaTransaccion;
 	
+	//-----Relaciones -------------
+	
+	//Una transaccion solo tiene una factura y cada factura solo una transaccion
+	@OneToOne(cascade =  CascadeType.ALL)
+	private Factura factura;
+	
+	//Una cliente puede tener muchas transacciones, pero una transaccion solo tiene una factura
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
+	
+//------Setters and Getters----------
+	public long getId_transaccion() {
+		return id_transaccion;
+	}
+
+	public void setId_transaccion(long id_transaccion) {
+		this.id_transaccion = id_transaccion;
+	}
+
+	public Date getFechaTransaccion() {
+		return fechaTransaccion;
+	}
+
+	public void setFechaTransaccion(Date fechaTransaccion) {
+		this.fechaTransaccion = fechaTransaccion;
+	}
+
+	public Factura getFactura() {
+		return factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 
 }

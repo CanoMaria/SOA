@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente")
 public class Cliente implements Serializable{
+	
 	private static final long serialVersionUID = -2096655693932225923L;
 
 	@Id
@@ -26,15 +27,15 @@ public class Cliente implements Serializable{
 	
 	@Column(length = 100,nullable = false)
 	private String email;
-
-	//-----------Setters and Getters-------
 	
-	public long getId() {
+	//-------Setters and Getters---------
+
+	public long getId_cliente() {
 		return id_cliente;
 	}
 
-	public void setId(long id) {
-		this.id_cliente = id;
+	public void setId_cliente(long id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
 	public String getNombre() {

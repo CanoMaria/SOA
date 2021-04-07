@@ -3,14 +3,11 @@ package iua.edu.soa.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -26,6 +23,11 @@ enum Level {
 @Table(name = "factura")
 public class Factura implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7932345257518151931L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_factura;
@@ -45,16 +47,47 @@ public class Factura implements Serializable{
 	
 	@Column(length = 100, nullable = false)
 	private Level estado;
+
+	public long getId_factura() {
+		return id_factura;
+	}
+
+	public void setId_factura(long id_factura) {
+		this.id_factura = id_factura;
+	}
+
+	public Date getFechaEmision() {
+		return fechaEmision;
+	}
+
+	public void setFechaEmision(Date fechaEmision) {
+		this.fechaEmision = fechaEmision;
+	}
+
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+	public double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+
+	public Level getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Level estado) {
+		this.estado = estado;
+	}
 	
-	//-----Relacion uno a muchos--------------
 	
-	//Un cliente puede tener muchas facturas, pero una factura solo puede tener un cliente
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
 	
-	//Una transaccion puede tener muchas facturas, pero una factura solo puede tener una transaccion
-		@ManyToOne(cascade = CascadeType.MERGE)
-		@JoinColumn(name = "transaccion_id")
-		private Transaccion transaccion;
 }
