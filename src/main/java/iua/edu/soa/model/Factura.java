@@ -3,11 +3,15 @@ package iua.edu.soa.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -47,7 +51,10 @@ public class Factura implements Serializable{
 	
 	@Column(length = 100, nullable = false)
 	private Level estado;
-
+	
+	
+	//-------Setters and Getters-----------------
+	
 	public long getId_factura() {
 		return id_factura;
 	}
@@ -87,7 +94,9 @@ public class Factura implements Serializable{
 	public void setEstado(Level estado) {
 		this.estado = estado;
 	}
-	
+	//una factura tiene un cliente pero un cliente muchas facturas
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Cliente cliente;
 	
 	
 }

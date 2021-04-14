@@ -8,5 +8,6 @@ public class Constantes {
 	
 	public static final String URL_TRANSACTION = URL_BASE + "/transaction";	
 	public static final String URL_CLIENT = URL_BASE + "/client";
+	public static final String URL_INVOICE = URL_BASE + "/invoice";
 	
 }
