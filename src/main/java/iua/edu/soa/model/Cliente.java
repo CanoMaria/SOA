@@ -30,7 +30,9 @@ public class Cliente implements Serializable{
 	
 	@Column(length = 100,nullable = false)
 	private String email;
-
+	
+	@OneToOne(mappedBy = "cliente")
+    private Transaccion transaccion;
 	
 	//-------Setters and Getters---------
 
@@ -65,7 +67,14 @@ public class Cliente implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public Transaccion getTransaccion() {
+		return transaccion;
+	}
+
+	public void setTransaccion(Transaccion transaccion) {
+		this.transaccion = transaccion;
+	}
 	
 	
 }

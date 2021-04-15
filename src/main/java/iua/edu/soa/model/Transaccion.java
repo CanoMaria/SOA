@@ -36,13 +36,13 @@ public class Transaccion implements Serializable{
 	
 	//Cada transaccion tiene una factura
 	@OneToOne
-	@JoinColumn(name = "factura", updatable = false, nullable = false)
+	@JoinColumn(name = "id_factura", updatable = false, nullable = false)
 	private Factura factura;
 	
 	//Cada transaccion tiene un cliente
 	@OneToOne
-	@JoinColumn(name = "cliente", updatable = false, nullable = false)
-	private Cliente cliente;	
+	@JoinColumn(name = "id_cliente", updatable = false, nullable = false)
+	private Cliente cliente;
 	
 	
 //------Setters and Getters----------

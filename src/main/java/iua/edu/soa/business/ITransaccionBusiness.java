@@ -8,7 +8,7 @@ import iua.edu.soa.model.Transaccion;
 
 
 public interface ITransaccionBusiness {
-	
-	
-	
+
+	public Transaccion add(Transaccion transaccion) throws BusinessException;
+
 }

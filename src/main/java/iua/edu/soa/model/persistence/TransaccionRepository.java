@@ -10,14 +10,4 @@ import iua.edu.soa.model.Transaccion;
 
 public interface TransaccionRepository extends JpaRepository<Transaccion, Long> {
 
-	/*@Query(value = "select * from transaccion t " + 
-			"inner join cliente c on t.id_cliente =c.id_cliente " + 
-			"inner join factura f on t.factura_id_factura=f.id_factura " + 
-			"where c.id_cliente = :id_client and f.estado=1 ", nativeQuery = true)
-	public  List<Transaccion> findPaid(@Param("id_client") long id_client);
-
-	@Query(value = "select * from transaccion t  where t.id_cliente = :id_client", nativeQuery = true)
-	public List<Transaccion> findByCliente(@Param("id_client") long id_client);
-	
-	*/
 }
