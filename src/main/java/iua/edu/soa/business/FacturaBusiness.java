@@ -32,8 +32,7 @@ public class FacturaBusiness implements IFacturaBusiness {
 	}
 	
 	@Override
-	public Factura changeStatus() throws BusinessException, NotFoundException {
-		Long id_factura=(long) 1;
+	public Factura changeStatus(Long id_factura) throws BusinessException, NotFoundException {
 		Factura factura;
 		Level estado=null;
 		try {

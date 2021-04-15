@@ -1,5 +1,8 @@
 package iua.edu.soa.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,12 +31,17 @@ public class TransaccionRestController {
 	private IFacturaBusiness facturaBusiness;
 	
 	@PostMapping(value = "/pay", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> add(@RequestBody Transaccion transaccion) throws NotFoundException {
+	public ResponseEntity<String> add(@RequestBody List<Transaccion> transacciones) throws NotFoundException {
+		Long id_factura;
 		try {
-			facturaBusiness.changeStatus();
-			transaccionBusiness.add(transaccion);
+			for (int i = 0; i < transacciones.size(); i++) {
+				id_factura=transacciones.get(i).getFactura().getId_factura(); //obtengo el id de factura de la transaccion
+				facturaBusiness.changeStatus(id_factura);
+				transaccionBusiness.add(transacciones.get(i));
+				
+			}
 			HttpHeaders responseHeaders = new HttpHeaders();
-			responseHeaders.set("location", Constantes.URL_TRANSACTION + '/' + transaccion.getId_transaccion());
+			responseHeaders.set("location", Constantes.URL_TRANSACTION + '/' + transacciones.get(0).getId_transaccion());
 			return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
 		} catch (BusinessException e) {
 			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
