@@ -2,6 +2,7 @@ package iua.edu.soa.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,14 +34,16 @@ public class Transaccion implements Serializable{
 	
 	//-----Relaciones -------------
 	
-	//Una transaccion solo tiene una factura y cada factura solo una transaccion
-	@OneToOne(cascade =  CascadeType.ALL)
+	//Cada transaccion tiene una factura
+	@OneToOne
+	@JoinColumn(name = "id_factura", updatable = false, nullable = false)
 	private Factura factura;
 	
-	//Una cliente puede tener muchas transacciones, pero una transaccion solo tiene una factura
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_cliente")
+	//Cada transaccion tiene un cliente
+	@OneToOne
+	@JoinColumn(name = "id_cliente", updatable = false, nullable = false)
 	private Cliente cliente;
+	
 	
 //------Setters and Getters----------
 	public long getId_transaccion() {

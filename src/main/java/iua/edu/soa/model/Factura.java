@@ -3,22 +3,21 @@ package iua.edu.soa.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-enum Level {
-	EMITIDA,
-	PAGADA, 
-	VENCIDA, 
-	ANULADA
-	}
+
 @Entity
 @Table(name = "factura")
 public class Factura implements Serializable{
@@ -47,7 +46,17 @@ public class Factura implements Serializable{
 	
 	@Column(length = 100, nullable = false)
 	private Level estado;
-
+	
+	@OneToOne(mappedBy = "factura")
+    private Transaccion transaccion;
+	
+	//una factura tiene un cliente pero un cliente muchas facturas
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Cliente cliente;
+		
+	
+	//-------Setters and Getters-----------------
+	
 	public long getId_factura() {
 		return id_factura;
 	}
@@ -87,7 +96,21 @@ public class Factura implements Serializable{
 	public void setEstado(Level estado) {
 		this.estado = estado;
 	}
-	
-	
+
+	public Transaccion getTransaccion() {
+		return transaccion;
+	}
+
+	public void setTransaccion(Transaccion transaccion) {
+		this.transaccion = transaccion;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 }
